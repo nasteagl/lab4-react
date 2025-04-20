@@ -1,0 +1,19 @@
+.category-select {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+}
+
+.category-select select {
+    margin-left: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+}

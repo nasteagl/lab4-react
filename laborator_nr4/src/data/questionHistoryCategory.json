@@ -1,0 +1,87 @@
+[{
+  "category": "Istorie",
+  "difficulty": "Ușor",
+  "question": "Cine a fost primul domnitor al Țării Românești?",
+  "options": ["Mihai Viteazul", "Vlad Țepeș", "Basarab I", "Ștefan cel Mare"],
+  "correctAnswer": "Basarab I"
+},
+{
+"category": "Istorie",
+"difficulty": "Ușor",
+"question": "În ce an a avut loc Marea Unire?",
+"options": ["1848", "1918", "1989", "1600"],
+"correctAnswer": "1918"
+},
+{
+"category": "Istorie",
+"difficulty": "Ușor",
+"question": "Cine a descoperit America?",
+"options": ["Marco Polo", "Amerigo Vespucci", "Cristofor Columb", "James Cook"],
+"correctAnswer": "Cristofor Columb"
+},
+{
+"category": "Istorie",
+"difficulty": "Ușor",
+"question": "Ce imperiu a construit Colosseumul?",
+"options": ["Egiptean", "Grec", "Roman", "Otoman"],
+"correctAnswer": "Roman"
+},
+
+{
+"category": "Istorie",
+"difficulty": "Mediu",
+"question": "Cine a fost domnitorul care a unit pentru prima dată cele trei principate române?",
+"options": ["Alexandru Ioan Cuza", "Basarab I", "Mihai Viteazul", "Ștefan cel Mare"],
+"correctAnswer": "Mihai Viteazul"
+},
+{
+"category": "Istorie",
+"difficulty": "Mediu",
+"question": "Ce tratat a pus capăt Primului Război Mondial?",
+"options": ["Tratatul de la Trianon", "Tratatul de la Versailles", "Pacea de la Adrianopol", "Tratatul de la Berlin"],
+"correctAnswer": "Tratatul de la Versailles"
+},
+{
+"category": "Istorie",
+"difficulty": "Mediu",
+"question": "În ce an a avut loc Revoluția Franceză?",
+"options": ["1492", "1789", "1848", "1917"],
+"correctAnswer": "1789"
+},
+{
+"category": "Istorie",
+"difficulty": "Mediu",
+"question": "Ce domnitor moldovean a câștigat Bătălia de la Vaslui?",
+"options": ["Petru Rareș", "Alexandru cel Bun", "Ștefan cel Mare", "Dimitrie Cantemir"],
+"correctAnswer": "Ștefan cel Mare"
+},
+
+{
+"category": "Istorie",
+"difficulty": "Greu",
+"question": "Când a început al Doilea Război Mondial?",
+"options": ["1939", "1941", "1936", "1945"],
+"correctAnswer": "1939"
+},
+{
+"category": "Istorie",
+"difficulty": "Greu",
+"question": "Care a fost capitala Imperiului Bizantin?",
+"options": ["Roma", "Atena", "Constantinopol", "Alexandria"],
+"correctAnswer": "Constantinopol"
+},
+{
+"category": "Istorie",
+"difficulty": "Greu",
+"question": "Ce conducător roman a fost asasinat în anul 44 î.Hr.?",
+"options": ["Nero", "Augustus", "Cezar", "Traian"],
+"correctAnswer": "Cezar"
+},
+{
+"category": "Istorie",
+"difficulty": "Greu",
+"question": "Ce eveniment istoric a avut loc în anul 1054?",
+"options": ["Cruciada a doua", "Căderea Romei", "Marea Schismă", "Descoperirea Americii"],
+"correctAnswer": "Marea Schismă"
+}
+]

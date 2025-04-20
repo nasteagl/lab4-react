@@ -1,0 +1,88 @@
+[
+  {
+    "category": "Filme",
+    "difficulty": "Ușor",
+    "question": "Cine interpretează rolul lui Jack în filmul Titanic?",
+    "options": ["Brad Pitt", "Leonardo DiCaprio", "Johnny Depp", "Tom Cruise"],
+    "correctAnswer": "Leonardo DiCaprio"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Ușor",
+    "question": "În ce film apare personajul Harry Potter?",
+    "options": ["Narnia", "Stăpânul Inelelor", "Harry Potter", "Twilight"],
+    "correctAnswer": "Harry Potter"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Ușor",
+    "question": "Ce animal este personajul principal în filmul animat Madagascar?",
+    "options": ["Leu", "Zebră", "Girafă", "Hipopotam"],
+    "correctAnswer": "Leu"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Ușor",
+    "question": "Ce culoare are mașina Lightning McQueen din filmul Cars?",
+    "options": ["Roșu", "Albastru", "Galben", "Negru"],
+    "correctAnswer": "Roșu"
+  },
+
+  {
+    "category": "Filme",
+    "difficulty": "Mediu",
+    "question": "Cine a regizat trilogia Stăpânul Inelelor?",
+    "options": ["Steven Spielberg", "Peter Jackson", "James Cameron", "Christopher Nolan"],
+    "correctAnswer": "Peter Jackson"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Mediu",
+    "question": "În ce film apare personajul Joker interpretat de Heath Ledger?",
+    "options": ["Joker", "The Dark Knight", "Batman Begins", "Justice League"],
+    "correctAnswer": "The Dark Knight"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Mediu",
+    "question": "Care este numele robotului principal din filmul Wall-E?",
+    "options": ["WALL-E", "EVA", "R2-D2", "BB-8"],
+    "correctAnswer": "WALL-E"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Mediu",
+    "question": "Ce actor interpretează rolul principal în filmul Matrix?",
+    "options": ["Brad Pitt", "Keanu Reeves", "Tom Hanks", "Will Smith"],
+    "correctAnswer": "Keanu Reeves"
+  },
+
+  {
+    "category": "Filme",
+    "difficulty": "Greu",
+    "question": "În ce an a fost lansat primul film din seria Star Wars?",
+    "options": ["1977", "1980", "1983", "1975"],
+    "correctAnswer": "1977"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Greu",
+    "question": "Ce regizor este cunoscut pentru filmele Inception, Interstellar și Dunkirk?",
+    "options": ["James Cameron", "Martin Scorsese", "Christopher Nolan", "Quentin Tarantino"],
+    "correctAnswer": "Christopher Nolan"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Greu",
+    "question": "Care este numele real al personajului Neo în Matrix?",
+    "options": ["Thomas Anderson", "John Wick", "Bruce Wayne", "Clark Kent"],
+    "correctAnswer": "Thomas Anderson"
+  },
+  {
+    "category": "Filme",
+    "difficulty": "Greu",
+    "question": "Ce film a câștigat Oscarul pentru Cel mai bun film în 2020?",
+    "options": ["Joker", "1917", "Parasite", "Once Upon a Time in Hollywood"],
+    "correctAnswer": "Parasite"
+  }
+]

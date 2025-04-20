@@ -1,0 +1,23 @@
+{
+  "name": "lab4-react",
+  "version": "1.0.0",
+  "description": "- Creează un proiect `React` folosind `Vite`.\r - Folosește fișiere `.json` pentru a stoca întrebările și răspunsurile.\r ### Interfață Utilizator (UI) & Experiență\r - Paginile trebuie să fie responsive (optimizate pentru mobile, tabletă și desktop).\r - Stilizarea se poate face cu CSS/modulare sau biblioteci externe (e.g., Tailwind, Material-UI).\r - Implementează schimbarea temei (minim 2: light și dark) cu un buton accesibil.\r ## Funcționalități\r ### 1. Pagina de Start\r Utilizatorul introduce:\r - Numele.\r - Opțiuni de quiz:\r     - Ordine aleatorie a întrebărilor (da/nu).\r     - Timp limită per întrebare (e.g., 10s, sau posibilitatea de a avea timp nelimitat).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nasteagl/lab4-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nasteagl/lab4-react/issues"
+  },
+  "homepage": "https://github.com/nasteagl/lab4-react#readme",
+  "dependencies": {
+    "react-router-dom": "^7.5.0"
+  }
+}
