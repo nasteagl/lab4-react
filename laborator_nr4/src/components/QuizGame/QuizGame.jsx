@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import questions from '../../data/questions.json';
 import UserOptions from '../UserOptions/UserOptions.jsx';
-import {CategorySelect} from '../CategorySelect/file.js';
+import { CategorySelect } from '../CategorySelect/file.js';
 import { FinalResult } from '../FinalResult/file.js';
 import { useTheme } from "../../ThemeProvider.jsx";
 
@@ -11,6 +11,7 @@ export function QuizGame() {
     const [isRandom, setIsRandom] = useState(false);
     const [category, setCategory] = useState('');
     const [difficulty, setDifficulty] = useState('');
+    const [quizQuestions, setQuizQuestions] = useState([]);     // <-- entire quiz list
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState('');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
@@ -20,65 +21,95 @@ export function QuizGame() {
     const [isQuizFinished, setIsQuizFinished] = useState(false);
     const { theme, toggleTheme } = useTheme();
 
+
     const filteredQuestions = questions.filter(
-        q => q.category === category && (difficulty === '' || q.difficulty === difficulty)
+        q => q.category === category &&
+            (difficulty === '' || q.difficulty === difficulty)
     );
-
-    const questionsToUse = isRandom ? filteredQuestions.sort(() => Math.random() - 0.5) : filteredQuestions;
-    const currentQuestion = questionsToUse[currentQuestionIndex];
-
-    useEffect(() => {
-        if (isTimed && timer > 0 && isQuizStarted) {
-            const intervalId = setInterval(() => {
-                setTimer((prevTime) => prevTime - 1);
-            }, 1000);
-            return () => clearInterval(intervalId);
-        } else if (timer === 0) {
-            alert('Time’s up! The correct answer is: ' + (currentQuestion ? currentQuestion.correctAnswer : 'N/A'));
-            handleNextQuestion();
-        }
-    }, [timer, isTimed, isQuizStarted, currentQuestion]);
 
     const startQuiz = useCallback(() => {
         if (!userName || !category) {
             alert('Please enter your name and select a category!');
             return;
         }
-        setIsQuizStarted(true);
-        setTimer(10);
-    }, [userName, category]);
 
-    const handleAnswerSelection = useCallback((option) => {
-        setSelectedOption(option);
-        if (option === currentQuestion.correctAnswer) {
-            setIsAnswerCorrect(true);
-            setScore(prevScore => prevScore + 1);
-        } else {
-            setIsAnswerCorrect(false);
+        const list = isRandom ? [...filteredQuestions].sort(() => Math.random() - 0.5) : filteredQuestions;
+
+        setQuizQuestions(list);
+        setCurrentQuestionIndex(0);
+        setScore(0);
+        setSelectedOption('');
+        setIsAnswerCorrect(null);
+        setTimer(10);
+        setIsQuizStarted(true);
+        setIsQuizFinished(false);
+    }, [userName, category, difficulty, filteredQuestions, isRandom]);
+
+    useEffect(() => {
+        if (!isTimed || !isQuizStarted || timer <= 0) return;
+        const id = setInterval(() => setTimer(t => t - 1), 1000);
+
+
+
+        return () => clearInterval(id);
+    }, [isTimed, isQuizStarted, timer]);
+    useEffect(() => {
+
+        if (!isTimed || !isQuizStarted) return;
+
+        if (timer <= 0) return;
+
+        const id = setInterval(() => setTimer(time => time - 1), 1000);
+        return () => clearInterval(id);
+    }, [isTimed, isQuizStarted, timer]);
+
+    useEffect(() => {
+        if (isTimed && isQuizStarted && timer === 0) {
+            alert(
+                'Time’s up! The correct answer is: ' +
+                (quizQuestions[currentQuestionIndex]?.correctAnswer )
+            );
+            handleNextQuestion();
         }
-    }, [currentQuestion]);
+    }, [timer, isTimed, isQuizStarted, currentQuestionIndex, quizQuestions]);
+
+    const handleAnswerSelection = useCallback(
+        option => {
+            setSelectedOption(option);
+            if (option === quizQuestions[currentQuestionIndex]?.correctAnswer) {
+                setIsAnswerCorrect(true);
+                setScore(score => score + 1);
+            } else {
+                setIsAnswerCorrect(false);
+            }
+        },
+        [currentQuestionIndex, quizQuestions]
+    );
 
     const handleNextQuestion = useCallback(() => {
-        if (currentQuestionIndex < questionsToUse.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        if (currentQuestionIndex < quizQuestions.length - 1) {
+            setCurrentQuestionIndex(index => index + 1);
             setSelectedOption('');
             setIsAnswerCorrect(null);
             setTimer(10);
         } else {
-            setIsQuizStarted(false);
             setIsQuizFinished(true);
+            setIsQuizStarted(false);
         }
-    }, [currentQuestionIndex, questionsToUse.length]);
+    }, [currentQuestionIndex, quizQuestions.length]);
 
     const restartQuiz = useCallback(() => {
-        setCurrentQuestionIndex(0);
-        setScore(0);
         setIsQuizStarted(false);
         setIsQuizFinished(false);
+        setQuizQuestions([]);
+        setCurrentQuestionIndex(0);
+        setScore(0);
         setTimer(10);
         setSelectedOption('');
         setIsAnswerCorrect(null);
     }, []);
+
+    const currentQuestion = quizQuestions[currentQuestionIndex];
 
     return (
         <div className={theme}>
@@ -86,7 +117,7 @@ export function QuizGame() {
                 Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
             </button>
 
-            {!isQuizStarted && !isQuizFinished ? (
+            {!isQuizStarted && !isQuizFinished && (
                 <div>
                     <UserOptions
                         userName={userName}
@@ -105,52 +136,58 @@ export function QuizGame() {
                     />
                     <button onClick={startQuiz}>Start Quiz</button>
                 </div>
-            ) : (
+            )}
+
+            {isQuizStarted && !isQuizFinished && (
                 <div>
                     <h1>Quiz Game</h1>
                     <h2>Hello, {userName}</h2>
                     {isTimed && <h3>Time remaining: {timer}s</h3>}
-                    <div>
-                        {currentQuestion ? (
-                            <>
-                                <p>{currentQuestion.question}</p>
+                    {currentQuestion ? (
+                        <>
+                            <p>{currentQuestion.question}</p>
+                            <div>
+                                {currentQuestion.options.map((opt, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => handleAnswerSelection(opt)}
+                                        disabled={!!selectedOption || (isTimed && timer === 0)}
+                                    >
+                                        {opt}
+                                    </button>
+                                ))}
+                            </div>
+                            {isAnswerCorrect !== null && (
                                 <div>
-                                    {currentQuestion.options.map((option, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => handleAnswerSelection(option)}
-                                            disabled={selectedOption}
-                                        >
-                                            {option}
-                                        </button>
-                                    ))}
+                                    {isAnswerCorrect ? (
+                                        <p>Correct Answer!</p>
+                                    ) : (
+                                        <p>Wrong! Correct answer: {currentQuestion.correctAnswer}</p>
+                                    )}
                                 </div>
-                                {isAnswerCorrect !== null && (
-                                    <div>
-                                        {isAnswerCorrect ? (
-                                            <p>Correct Answer!</p>
-                                        ) : (
-                                            <p>Wrong Answer! The correct answer is: {currentQuestion.correctAnswer}</p>
-                                        )}
-                                    </div>
-                                )}
-                                <button onClick={handleNextQuestion} disabled={selectedOption === ''}>
-                                    Next Question
-                                </button>
-                            </>
-                        ) : (
-                            <p>No questions available for the selected category and difficulty.</p>
-                        )}
-                    </div>
+                            )}
+                            <button
+                                onClick={handleNextQuestion}
+                                disabled={!selectedOption && !(isTimed && timer === 0)}
+                            >
+                                Next Question
+                            </button>
+                        </>
+                    ) : (
+                        <p>No questions available for the selected category/difficulty.</p>
+                    )}
                 </div>
             )}
-            {isQuizFinished && <FinalResult
-                score={score}
-                totalQuestions={questionsToUse.length}
-                restartQuiz={restartQuiz}
-                username={userName}
-                category={category}
-            />}
+
+            {isQuizFinished && (
+                <FinalResult
+                    score={score}
+                    totalQuestions={quizQuestions.length}
+                    restartQuiz={restartQuiz}
+                    username={userName}
+                    category={category}
+                />
+            )}
         </div>
     );
 }

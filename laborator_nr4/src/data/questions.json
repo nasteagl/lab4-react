@@ -307,7 +307,7 @@
   {
     "question": "Ce este un număr prim?",
     "correctAnswer": "Un număr care are exact 2 divizori",
-    "options": ["Număr par", "Număr prim", "Număr divizibil cu 3", "Număr impar"],
+    "options": ["Număr par", "Număr care are exact 2 divizori", "Număr divizibil cu 3", "Număr impar"],
     "difficulty": "Mediu",
     "category": "Matematică"
   },
