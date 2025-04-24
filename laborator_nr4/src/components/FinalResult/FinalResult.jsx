@@ -8,9 +8,6 @@ export function FinalResult({ score, totalQuestions, restartQuiz, username, cate
         if (!username || !category) return;
 
         const storageKey = `bestScore_${username}_${category}`;
-
-
-
         const storedScore = localStorage.getItem(storageKey);
         const previousBest = storedScore ? parseInt(storedScore, 10) : null;
 
@@ -24,9 +21,9 @@ export function FinalResult({ score, totalQuestions, restartQuiz, username, cate
         const scores = Object.keys(localStorage)
             .filter(key => key.startsWith("bestScore_"))
             .map(key => {
-                const [_, user, cat] = key.split("_");
+                const keyParts = key.split("_");
                 return {
-                    user,
+                    user: keyParts[1],
                     category: category,
                     score: parseInt(localStorage.getItem(key), 10)
                 };
@@ -47,9 +44,9 @@ export function FinalResult({ score, totalQuestions, restartQuiz, username, cate
             <h3>Best Scores from All Users</h3>
             <ul>
                 {allScores.map((entry, index) => (
-                    <ul key={index}>
+                    <li key={index}>
                         <strong>{entry.user}</strong> - {entry.category}: {entry.score}
-                    </ul>
+                    </li>
                 ))}
             </ul>
 

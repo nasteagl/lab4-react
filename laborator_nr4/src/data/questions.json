@@ -8,7 +8,7 @@
   },
   {
     "question": "Ce țară are cei mai mulți locuitori?",
-    "correctAnswer": "China",
+    "correctAnswer": "INDIA",
     "options": ["SUA", "India", "China", "Brazilia"],
     "difficulty": "Ușor",
     "category": "Geografie"

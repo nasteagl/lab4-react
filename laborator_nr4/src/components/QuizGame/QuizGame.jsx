@@ -11,7 +11,7 @@ export function QuizGame() {
     const [isRandom, setIsRandom] = useState(false);
     const [category, setCategory] = useState('');
     const [difficulty, setDifficulty] = useState('');
-    const [quizQuestions, setQuizQuestions] = useState([]);     // <-- entire quiz list
+    const [quizQuestions, setQuizQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState('');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
@@ -20,6 +20,16 @@ export function QuizGame() {
     const [score, setScore] = useState(0);
     const [isQuizFinished, setIsQuizFinished] = useState(false);
     const { theme, toggleTheme } = useTheme();
+
+
+//Acum ar trebuie să meargă corect, cel puțin sper
+    useEffect(() => {
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('isTimed', isTimed);
+        localStorage.setItem('isRandom', isRandom);
+        localStorage.setItem('category', category);
+        localStorage.setItem('difficulty', difficulty);
+    }, [userName, isTimed, isRandom, category, difficulty]);
 
 
     const filteredQuestions = questions.filter(
@@ -46,31 +56,16 @@ export function QuizGame() {
     }, [userName, category, difficulty, filteredQuestions, isRandom]);
 
     useEffect(() => {
-        if (!isTimed || !isQuizStarted || timer <= 0) return;
-        const id = setInterval(() => setTimer(t => t - 1), 1000);
+        let timerInterval = null;
 
-
-
-        return () => clearInterval(id);
-    }, [isTimed, isQuizStarted, timer]);
-    useEffect(() => {
-
-        if (!isTimed || !isQuizStarted) return;
-
-        if (timer <= 0) return;
-
-        const id = setInterval(() => setTimer(time => time - 1), 1000);
-        return () => clearInterval(id);
-    }, [isTimed, isQuizStarted, timer]);
-
-    useEffect(() => {
-        if (isTimed && isQuizStarted && timer === 0) {
-            alert(
-                'Time’s up! The correct answer is: ' +
-                (quizQuestions[currentQuestionIndex]?.correctAnswer )
-            );
+        if (isTimed && isQuizStarted && timer > 0) {
+            timerInterval = setTimeout(() => {setTimer((prevTimer) => prevTimer - 1);}, 1000);
+        } else if (timer === 0 && isTimed && isQuizStarted) {
+            alert('Time’s up! The correct answer is: ' + (quizQuestions[currentQuestionIndex]?.correctAnswer));
             handleNextQuestion();
         }
+
+        return () => clearTimeout(timerInterval);
     }, [timer, isTimed, isQuizStarted, currentQuestionIndex, quizQuestions]);
 
     const handleAnswerSelection = useCallback(
@@ -79,11 +74,8 @@ export function QuizGame() {
             if (option === quizQuestions[currentQuestionIndex]?.correctAnswer) {
                 setIsAnswerCorrect(true);
                 setScore(score => score + 1);
-            } else {
-                setIsAnswerCorrect(false);
-            }
-        },
-        [currentQuestionIndex, quizQuestions]
+            } else {setIsAnswerCorrect(false);}
+        }, [currentQuestionIndex, quizQuestions]
     );
 
     const handleNextQuestion = useCallback(() => {

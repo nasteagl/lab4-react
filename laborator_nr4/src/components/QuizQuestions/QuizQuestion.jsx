@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import './file.css';
+
 
 const QuizQuestion=React.memo(({ question, answers, onAnswerSelect })=> {
 
@@ -28,4 +28,3 @@ const QuizQuestion=React.memo(({ question, answers, onAnswerSelect })=> {
 });
 
 
-//trebuie sa salvat scorul userului si sa fie comparat cu al lui anterior cu cel recent => DONE
